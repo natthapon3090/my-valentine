@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><link rel="stylesheet" href="style.css"></head>
+<head>
+<meta charset="UTF-8">
+
+<!-- ให้มือถือทำงานตามขนาดจริง -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* ===============================
+   SAME SIZE AS PREVIOUS PAGES
+=============================== */
+.card{
+  width: clamp(340px, 92vw, 400px) !important;
+  margin: 0 auto !important;
+}
+</style>
+
+</head>
 <body>
+
 <div class="card">
 <h1 class="type">จดหมายถึงเธอ 💌</h1>
 <p class="type">
 อาจไม่ได้พูดเก่งที่สุด  
 แต่ทุกความรู้สึกนี้…จริงใจเสมอ
 </p>
+
 <button class="btn" onclick="history.back()">กลับ</button>
 </div>
+
 <script src="effects.js"></script>
 </body>
 </html>
-

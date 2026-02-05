@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chocolate Decor</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* ===== STAGE ===== */
+.stage{
+  position:relative;
+  width:280px;
+  height:200px;
+  margin:16px auto;
+}
+
+/* 🍫 CHOCOLATE IMAGE */
+.choco-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:22px;
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+/* ===== DECOR ===== */
+.decor{
+  position:absolute;
+  width:44px;
+  cursor:grab;
+  user-select:none;
+  touch-action:none;
+}
+
+/* ===== DECOR MENU ===== */
+.decor-menu{
+  display:flex;
+  justify-content:space-between;
+  margin:14px 0;
+}
+
+.decor-btn{
+  width:52px;
+  height:52px;
+  border:none;
+  border-radius:16px;
+  background:white;
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
+  cursor:pointer;
+}
+.decor-btn img{
+  width:30px;
+}
+
+/* ===== RESULT ===== */
+.result{
+  display:none;
+  margin-top:10px;
+  text-align:center;
+  color:#6b2a45;
+}
+</style>
+</head>
+
+<body>
+
+<div class="nicha-bg">NICHA</div>
+
+<div class="card">
+  <h1 class="type">ช็อกโกแลต 🍫</h1>
+  <p class="type">แต่งหน้าช็อกโกแลตของเรา</p>
+
+  <!-- 🍫 STAGE -->
+  <div class="stage" id="stage">
+    <!-- รูปช็อกโกแลตจากลิงก์ที่ลูกพี่ให้ -->
+    <img class="choco-img"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLKIO1chTTE_1wCITetCwB_g1WKxlg72W4A&s"
+      alt="chocolate">
+  </div>
+
+  <!-- ✨ DECOR SELECT -->
+  <div class="decor-menu">
+    <button class="decor-btn" onclick="addDecor('🍓')">🍓</button>
+    <button class="decor-btn" onclick="addDecor('💖')">💖</button>
+    <button class="decor-btn" onclick="addDecor('✨')">✨</button>
+    <button class="decor-btn" onclick="addDecor('🌰')">🌰</button>
+  </div>
+
+  <button class="btn" onclick="finish()">เสร็จแล้ว 💝</button>
+
+  <div class="result" id="result">
+    ช็อกโกแลตชิ้นนี้ทำขึ้นมาเพื่อเธอคนเดียว 🍫💖
+  </div>
+
+  <button class="btn" onclick="location.href='menu.html'">
+    ← กลับหน้าเมนู
+  </button>
+</div>
+
+<script src="effects.js"></script>
+
+<script>
+const stage = document.getElementById("stage");
+
+/* ===== ADD DECOR ===== */
+function addDecor(symbol){
+  const el = document.createElement("div");
+  el.className = "decor";
+  el.innerText = symbol;
+
+  el.style.left = Math.random()*200 + "px";
+  el.style.top  = Math.random()*120 + "px";
+
+  makeDraggable(el);
+  stage.appendChild(el);
+}
+
+/* ===== DRAG ===== */
+function makeDraggable(el){
+  let offsetX, offsetY;
+
+  el.addEventListener("pointerdown", e=>{
+    offsetX = e.offsetX;
+    offsetY = e.offsetY;
+    el.setPointerCapture(e.pointerId);
+  });
+
+  el.addEventListener("pointermove", e=>{
+    if(e.pressure === 0) return;
+    const rect = stage.getBoundingClientRect();
+    el.style.left = (e.clientX - rect.left - offsetX) + "px";
+    el.style.top  = (e.clientY - rect.top  - offsetY) + "px";
+  });
+}
+
+/* ===== FINISH ===== */
+function finish(){
+  document.getElementById("result").style.display = "block";
+}
+</script>
+
+</body>
+</html>

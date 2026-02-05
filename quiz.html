@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz of Us</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* ===== QUIZ OPTIONS ===== */
+.quiz-option{
+  width:100%;
+  padding:16px;
+  margin:10px 0;
+  border-radius:20px;
+  border:none;
+  background:rgba(255,255,255,.9);
+  font-size:16px;
+  box-shadow:0 12px 30px rgba(0,0,0,.15);
+  transition:.35s;
+}
+.quiz-option:hover{
+  transform:translateY(-4px) scale(1.03);
+  background:#ffe3ee;
+}
+
+/* ===== POPUP COMMON ===== */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.35);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99;
+}
+
+.popup-box{
+  background:white;
+  padding:32px;
+  border-radius:28px;
+  text-align:center;
+  width:85%;
+  max-width:320px;
+  animation:pop .45s ease;
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+@keyframes pop{
+  from{transform:scale(.7);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.popup-box h2{
+  margin:0;
+  color:#ff4f87;
+}
+
+.popup-box.correct h2{
+  color:#2ecc71;
+}
+
+.popup-box p{
+  margin:12px 0 22px;
+  font-size:15px;
+}
+
+.btn{
+  padding:12px 26px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ff5fa2,#ff2e7a);
+  color:white;
+  font-size:15px;
+}
+
+/* ===== FLOAT BACK MENU ===== */
+.back-menu-btn{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  padding:12px 18px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ffffff,#ffe3ee);
+  color:#d94b8c;
+  font-size:14px;
+  font-weight:600;
+  box-shadow:0 12px 30px rgba(0,0,0,.18);
+  cursor:pointer;
+  z-index:999;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🌸 NICHA BACKGROUND -->
+<div class="nicha-bg">NICHA</div>
+
+<!-- 🧠 QUIZ CARD -->
+<div class="card" id="quizCard">
+  <h1 class="type" id="title"></h1>
+  <p class="type" id="question"></p>
+  <div id="choices"></div>
+</div>
+
+<!-- ❌ WRONG -->
+<div class="popup" id="wrongPopup">
+  <div class="popup-box">
+    <h2>ยังไม่ใช่น้า 🥺</h2>
+    <p>ลองคิดถึงเราดี ๆ อีกครั้งนะ</p>
+    <button class="btn" onclick="closeWrong()">ลองใหม่</button>
+  </div>
+</div>
+
+<!-- ✅ CORRECT -->
+<div class="popup" id="correctPopup">
+  <div class="popup-box correct">
+    <h2>ถูกต้องนะ 💖</h2>
+    <p>เรายังจำเรื่องนี้ได้เหมือนกันเลย</p>
+    <button class="btn" onclick="nextQuestion()">ไปต่อ</button>
+  </div>
+</div>
+
+<!-- 🔙 BACK TO MENU FLOAT BUTTON -->
+<div class="back-menu-btn" onclick="location.href='menu.html'">
+  ← เมนู
+</div>
+
+<script src="effects.js"></script>
+<script>
+const quiz = [
+  {
+    q:"เราเจอกันครั้งแรกที่ไหน?",
+    a:["มหาลัย","ออนไลน์","ร้านกาแฟ","งานเลี้ยง"],
+    c:1
+  },
+  {
+    q:"เราชอบกินอะไรด้วยกันที่สุด?",
+    a:["หมูกระทะ","ชาบู","ของหวาน","ทุกอย่าง"],
+    c:3
+  },
+  {
+    q:"นิสัยเราที่เธอชอบมากที่สุดคืออะไร?",
+    a:["ขี้อ้อน","ใจดี","ตลก","ทั้งหมด"],
+    c:3
+  },
+  {
+    q:"คำที่เหมาะกับเราที่สุด?",
+    a:["บังเอิญ","โชคดี","ธรรมดา","พรหมลิขิต"],
+    c:3
+  }
+];
+
+let index = 0;
+
+function render(){
+  document.getElementById("title").innerText =
+    `รู้จักเราดีแค่ไหน 💗 (${index+1}/${quiz.length})`;
+  document.getElementById("question").innerText = quiz[index].q;
+
+  const box = document.getElementById("choices");
+  box.innerHTML = "";
+
+  quiz[index].a.forEach((text,i)=>{
+    const btn = document.createElement("button");
+    btn.className = "quiz-option";
+    btn.innerText = text;
+    btn.onclick = ()=>check(i);
+    box.appendChild(btn);
+  });
+}
+
+function check(i){
+  if(i === quiz[index].c){
+    document.getElementById("correctPopup").style.display="flex";
+  }else{
+    document.getElementById("wrongPopup").style.display="flex";
+  }
+}
+
+function closeWrong(){
+  document.getElementById("wrongPopup").style.display="none";
+}
+
+function nextQuestion(){
+  document.getElementById("correctPopup").style.display="none";
+  index++;
+  if(index < quiz.length){
+    render();
+  }else{
+    location.href = "final.html";
+  }
+}
+
+render();
+</script>
+</body>
+</html>

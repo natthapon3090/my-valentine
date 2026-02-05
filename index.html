@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Valentine</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* ===== FLOATING HEART ===== */
+.heart-hero{
+  font-size:64px;
+  text-align:center;
+  margin-bottom:10px;
+  animation:heartFloat 4s ease-in-out infinite;
+  text-shadow:0 12px 30px rgba(255,90,150,.6);
+}
+@keyframes heartFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+/* ===== SUB DETAIL ===== */
+.subtitle{
+  text-align:center;
+  color:#b43b73;
+  font-size:15px;
+  margin-bottom:10px;
+}
+
+.divider{
+  width:60%;
+  height:2px;
+  margin:14px auto;
+  background:linear-gradient(90deg,transparent,#ff7eb6,transparent);
+  border-radius:2px;
+}
+
+/* ===== EXTRA TEXT ===== */
+.desc{
+  font-size:14px;
+  line-height:1.8;
+  margin-top:6px;
+  color:#6b2a45;
+}
+
+/* ===== FLOATING BACK HEARTS ===== */
+.bg-heart{
+  position:fixed;
+  bottom:-40px;
+  font-size:22px;
+  opacity:.25;
+  animation:floatUp 12s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(0) scale(.8);opacity:0}
+  10%{opacity:.25}
+  100%{transform:translateY(-120vh) scale(1.4);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- NICHA BACKGROUND -->
+<div class="nicha-bg">NICHA</div>
+
+<!-- FLOATING BACK HEARTS -->
+<div class="bg-heart" style="left:10%">💗</div>
+<div class="bg-heart" style="left:30%;animation-delay:3s">💖</div>
+<div class="bg-heart" style="left:55%;animation-delay:6s">💞</div>
+<div class="bg-heart" style="left:75%;animation-delay:9s">💕</div>
+
+<!-- MAIN CARD -->
+<div class="card">
+
+  <div class="heart-hero">❤️</div>
+
+  <h1 class="type">My Valentine</h1>
+  <p class="type subtitle">for the one I love</p>
+
+  <div class="divider"></div>
+
+  <p class="type desc">
+    ของขวัญชิ้นนี้ไม่ได้มีค่าเพราะมันสวย<br>
+    แต่มีค่าเพราะมันสร้างขึ้นมาเพื่อเธอ<br>
+    และทุกอย่างข้างใน…คือเรื่องของเรา 💕
+  </p>
+
+  <button class="btn" onclick="location.href='lock.html'">
+    เริ่มต้นความทรงจำ 💌
+  </button>
+
+</div>
+
+<script src="effects.js"></script>
+</body>
+</html>

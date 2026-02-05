@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>โพลารอยด์ของเรา</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.scratch-wrap{
+  position:relative;
+  width:100%;
+  margin-top:14px;
+}
+
+.photo{
+  width:100%;
+  border-radius:18px;
+  display:block;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+canvas{
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+}
+
+.hint{
+  text-align:center;
+  margin-top:10px;
+  color:#d94b8c;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+<div class="nicha-bg">NICHA</div>
+
+<div class="card">
+  <h1 class="type">โพลารอยด์ 📸</h1>
+  <p class="type">ขูดเบา ๆ เพื่อเปิดความทรงจำ</p>
+
+  <div class="scratch-wrap">
+    <img id="photo" class="photo">
+    <canvas id="scratch"></canvas>
+  </div>
+
+  <div class="hint type">ใช้นิ้วลูบที่รูป 💗</div>
+
+  <button class="btn" id="nextBtn">ภาพถัดไป →</button>
+  <button class="btn" onclick="history.back()">กลับ</button>
+</div>
+
+<script src="effects.js"></script>
+
+<script>
+/* ===== 6 IMAGES ===== */
+const images = [
+  "https://picsum.photos/id/1011/400/300",
+  "https://picsum.photos/id/1025/400/300",
+  "https://picsum.photos/id/1035/400/300",
+  "https://picsum.photos/id/1043/400/300",
+  "https://picsum.photos/id/1062/400/300",
+  "https://picsum.photos/id/1074/400/300"
+];
+
+let index = Number(localStorage.getItem("polaroid")) || 0;
+
+const img = document.getElementById("photo");
+const canvas = document.getElementById("scratch");
+const ctx = canvas.getContext("2d");
+
+img.src = images[index];
+
+img.onload = () => {
+  canvas.width = img.clientWidth;
+  canvas.height = img.clientHeight;
+
+  ctx.fillStyle = "#ff9ecf";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  ctx.globalCompositeOperation = "destination-out";
+};
+
+/* ===== SCRATCH ===== */
+let isDown = false;
+
+function erase(x,y){
+  ctx.beginPath();
+  ctx.arc(x,y,26,0,Math.PI*2);
+  ctx.fill();
+}
+
+canvas.addEventListener("pointerdown",()=>isDown=true);
+canvas.addEventListener("pointerup",()=>isDown=false);
+canvas.addEventListener("pointerleave",()=>isDown=false);
+
+canvas.addEventListener("pointermove",e=>{
+  if(!isDown) return;
+  const r = canvas.getBoundingClientRect();
+  erase(e.clientX - r.left, e.clientY - r.top);
+});
+
+/* ===== NEXT IMAGE ===== */
+document.getElementById("nextBtn").onclick = ()=>{
+  index++;
+  if(index >= images.length){
+    localStorage.removeItem("polaroid");
+    location.href = "menu.html";
+  }else{
+    localStorage.setItem("polaroid", index);
+    location.reload();
+  }
+};
+</script>
+</body>
+</html>

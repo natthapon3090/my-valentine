@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="nicha-bg">NICHA</div>
+
+<!-- WRAPPER (ไม่มี transform) -->
+<div class="lock-wrapper">
+
+  <div class="card">
+    <h1 class="type">กรอกรหัสผ่าน 🔒</h1>
+    <p class="type">คำใบ้ : 123456</p>
+
+    <div class="pin">
+      <div></div><div></div><div></div>
+      <div></div><div></div><div></div>
+    </div>
+
+    <div class="keypad">
+      <button onclick="press(1)">1</button>
+      <button onclick="press(2)">2</button>
+      <button onclick="press(3)">3</button>
+      <button onclick="press(4)">4</button>
+      <button onclick="press(5)">5</button>
+      <button onclick="press(6)">6</button>
+      <button onclick="press(7)">7</button>
+      <button onclick="press(8)">8</button>
+      <button onclick="press(9)">9</button>
+      <button onclick="press(0)">0</button>
+      <button onclick="confirmPin()">ยืนยัน</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- POPUP GUI -->
+<div class="popup-lock" id="popup">
+  <div class="popup-box">
+    <h2 id="popupTitle"></h2>
+    <p id="popupText"></p>
+    <button class="btn" onclick="closePopup()">โอเค</button>
+  </div>
+</div>
+
+<script src="effects.js"></script>
+</body>
+</html>

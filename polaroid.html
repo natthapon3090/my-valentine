@@ -23,6 +23,7 @@ canvas{
   position:absolute;
   inset:0;
   border-radius:18px;
+  touch-action: none; /* ✅ กันจอเลื่อนบนมือถือ */
 }
 
 .hint{
@@ -35,7 +36,6 @@ canvas{
 </head>
 
 <body>
-
 
 <div class="card">
   <h1 class="type">โพลารอยด์ 📸</h1>
@@ -83,21 +83,29 @@ img.onload = () => {
   ctx.globalCompositeOperation = "destination-out";
 };
 
-/* ===== SCRATCH ===== */
+/* ===== SCRATCH (MOBILE EASY) ===== */
 let isDown = false;
+const BRUSH = 45; // ✅ ใหญ่ขึ้น ขูดง่ายมาก
+
+canvas.style.touchAction = "none";
 
 function erase(x,y){
   ctx.beginPath();
-  ctx.arc(x,y,26,0,Math.PI*2);
+  ctx.arc(x,y,BRUSH,0,Math.PI*2);
   ctx.fill();
 }
 
-canvas.addEventListener("pointerdown",()=>isDown=true);
-canvas.addEventListener("pointerup",()=>isDown=false);
-canvas.addEventListener("pointerleave",()=>isDown=false);
+canvas.addEventListener("pointerdown", e=>{
+  isDown = true;
+  e.preventDefault();
+});
 
-canvas.addEventListener("pointermove",e=>{
+canvas.addEventListener("pointerup", ()=>isDown=false);
+canvas.addEventListener("pointerleave", ()=>isDown=false);
+
+canvas.addEventListener("pointermove", e=>{
   if(!isDown) return;
+  e.preventDefault(); // ✅ กัน scroll
   const r = canvas.getBoundingClientRect();
   erase(e.clientX - r.left, e.clientY - r.top);
 });
@@ -116,4 +124,3 @@ document.getElementById("nextBtn").onclick = ()=>{
 </script>
 </body>
 </html>
-

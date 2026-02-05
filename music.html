@@ -1,18 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><link rel="stylesheet" href="style.css"></head>
+<head>
+<meta charset="UTF-8">
+
+<!-- สำคัญ: ให้มือถือทำงานจริง -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* ===============================
+   MOBILE SIZE FIX (เหมือนอันเมื่อกี้)
+=============================== */
+.card{
+  width: clamp(340px, 92vw, 400px) !important;
+  margin: 0 auto !important;
+}
+</style>
+
+</head>
 <body>
+
 <div class="card">
 <h1 class="type">เพลงของเรา 🎵</h1>
 <p class="type">เพลงนี้…มีเธออยู่ในทุกโน้ต</p>
-<button class="btn" onclick="window.open('https://youtube.com/playlist?list=PLrPyT7mdXe80qhYRrfymyJ3Ze450F8NgB&si=9N0XL_vuMCNqiWzB','_blank')">
+
+<button class="btn"
+onclick="window.open('https://youtube.com/playlist?list=PLrPyT7mdXe80qhYRrfymyJ3Ze450F8NgB&si=9N0XL_vuMCNqiWzB','_blank')">
 เปิดเพลง
 </button>
+
 <button class="btn" onclick="history.back()">กลับ</button>
 </div>
+
 <script src="effects.js"></script>
 </body>
 </html>
-
-
-

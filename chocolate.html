@@ -30,7 +30,7 @@
   width:44px;
   cursor:grab;
   user-select:none;
-  touch-action:none;
+  touch-action:none; /* ✅ สำคัญมาก */
 }
 
 /* ===== DECOR MENU ===== */
@@ -65,14 +65,12 @@
 
 <body>
 
-
 <div class="card">
   <h1 class="type">ช็อกโกแลต 🍫</h1>
   <p class="type">แต่งหน้าช็อกโกแลตของเรา</p>
 
   <!-- 🍫 STAGE -->
   <div class="stage" id="stage">
-    <!-- รูปช็อกโกแลตจากลิงก์ที่ลูกพี่ให้ -->
     <img class="choco-img"
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLKIO1chTTE_1wCITetCwB_g1WKxlg72W4A&s"
       alt="chocolate">
@@ -115,21 +113,35 @@ function addDecor(symbol){
   stage.appendChild(el);
 }
 
-/* ===== DRAG ===== */
+/* ===== DRAG (MOBILE FIX) ===== */
 function makeDraggable(el){
-  let offsetX, offsetY;
+  let isDragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
 
   el.addEventListener("pointerdown", e=>{
-    offsetX = e.offsetX;
-    offsetY = e.offsetY;
+    isDragging = true;
+    const rect = el.getBoundingClientRect();
+    offsetX = e.clientX - rect.left;
+    offsetY = e.clientY - rect.top;
     el.setPointerCapture(e.pointerId);
+    e.preventDefault(); // ✅ กันจอเลื่อน
   });
 
   el.addEventListener("pointermove", e=>{
-    if(e.pressure === 0) return;
+    if(!isDragging) return;
     const rect = stage.getBoundingClientRect();
     el.style.left = (e.clientX - rect.left - offsetX) + "px";
     el.style.top  = (e.clientY - rect.top  - offsetY) + "px";
+    e.preventDefault();
+  });
+
+  el.addEventListener("pointerup", ()=>{
+    isDragging = false;
+  });
+
+  el.addEventListener("pointercancel", ()=>{
+    isDragging = false;
   });
 }
 
@@ -141,4 +153,3 @@ function finish(){
 
 </body>
 </html>
-

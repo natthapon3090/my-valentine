@@ -7,11 +7,11 @@
 
 <style>
 /* ===============================
-   FORCE OVERRIDE (สำคัญมาก)
+   DEFAULT (DESKTOP / TABLET)
 =============================== */
 .card{
-  width:94vw !important;
-  max-width:94vw !important;
+  max-width:420px !important; /* คอมพอดี */
+  width:100% !important;
 }
 
 /* =============================== */
@@ -43,29 +43,19 @@ canvas{
 }
 
 /* ===============================
-   📱 MOBILE FIX (ขยายจริง)
+   📱 MOBILE ONLY (ขยายพอดี)
 =============================== */
 @media (max-width: 768px){
 
   .card{
-    width:94vw !important;
-    max-width:94vw !important;
-    padding:20px !important;
-  }
-
-  .scratch-wrap{
-    width:100%;
+    width:92vw !important;     /* ไม่เต็มจอ */
+    max-width:92vw !important;
+    padding:18px !important;
   }
 
   .photo{
-    width:100%;
-    min-height:300px; /* 🔥 รูปใหญ่ขึ้นจริง */
+    min-height:260px;          /* ใหญ่ขึ้น แต่ไม่เว่อร์ */
     object-fit:cover;
-  }
-
-  canvas{
-    width:100%;
-    height:100%;
   }
 }
 </style>
@@ -115,13 +105,12 @@ img.onload = () => {
 
   ctx.fillStyle = "#ff9ecf";
   ctx.fillRect(0,0,canvas.width,canvas.height);
-
   ctx.globalCompositeOperation = "destination-out";
 };
 
 /* ===== SCRATCH EASY ===== */
 let isDown = false;
-const BRUSH = 60; /* ใหญ่ขึ้น */
+const BRUSH = 55;
 
 function erase(x,y){
   ctx.beginPath();
@@ -133,7 +122,6 @@ canvas.addEventListener("pointerdown", e=>{
   isDown = true;
   e.preventDefault();
 });
-
 canvas.addEventListener("pointerup", ()=>isDown=false);
 canvas.addEventListener("pointerleave", ()=>isDown=false);
 

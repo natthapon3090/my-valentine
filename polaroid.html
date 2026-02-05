@@ -43,18 +43,18 @@ canvas{
 }
 
 /* ===============================
-   📱 MOBILE ONLY (ขยายพอดี)
+   📱 MOBILE (ขยายอีก)
 =============================== */
 @media (max-width: 768px){
 
   .card{
-    width:92vw !important;     /* ไม่เต็มจอ */
-    max-width:92vw !important;
-    padding:18px !important;
+    width:98vw !important;      /* ✅ ใหญ่เกือบเต็มจอ */
+    max-width:98vw !important;
+    padding:20px !important;
   }
 
   .photo{
-    min-height:260px;          /* ใหญ่ขึ้น แต่ไม่เว่อร์ */
+    min-height:320px;           /* ✅ รูปสูงขึ้น */
     object-fit:cover;
   }
 }
@@ -83,12 +83,12 @@ canvas{
 <script>
 /* ===== 6 IMAGES ===== */
 const images = [
-  "https://picsum.photos/id/1011/700/500",
-  "https://picsum.photos/id/1025/700/500",
-  "https://picsum.photos/id/1035/700/500",
-  "https://picsum.photos/id/1043/700/500",
-  "https://picsum.photos/id/1062/700/500",
-  "https://picsum.photos/id/1074/700/500"
+  "https://picsum.photos/id/1011/800/600",
+  "https://picsum.photos/id/1025/800/600",
+  "https://picsum.photos/id/1035/800/600",
+  "https://picsum.photos/id/1043/800/600",
+  "https://picsum.photos/id/1062/800/600",
+  "https://picsum.photos/id/1074/800/600"
 ];
 
 let index = Number(localStorage.getItem("polaroid")) || 0;
@@ -110,7 +110,7 @@ img.onload = () => {
 
 /* ===== SCRATCH EASY ===== */
 let isDown = false;
-const BRUSH = 55;
+const BRUSH = 60; // ใหญ่ขึ้นอีก ขูดโคตรง่าย
 
 function erase(x,y){
   ctx.beginPath();

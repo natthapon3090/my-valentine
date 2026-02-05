@@ -6,6 +6,15 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
+/* ===============================
+   FORCE OVERRIDE (สำคัญมาก)
+=============================== */
+.card{
+  width:94vw !important;
+  max-width:94vw !important;
+}
+
+/* =============================== */
 .scratch-wrap{
   position:relative;
   width:100%;
@@ -23,7 +32,7 @@ canvas{
   position:absolute;
   inset:0;
   border-radius:18px;
-  touch-action: none; /* กันจอเลื่อน */
+  touch-action:none;
 }
 
 .hint{
@@ -38,21 +47,19 @@ canvas{
 =============================== */
 @media (max-width: 768px){
 
-  /* ขยายการ์ด */
   .card{
-    width:94vw;
-    max-width:none;
+    width:94vw !important;
+    max-width:94vw !important;
+    padding:20px !important;
   }
 
-  /* รูปใหญ่ขึ้น */
   .scratch-wrap{
     width:100%;
   }
 
   .photo{
     width:100%;
-    height:auto;
-    min-height:260px; /* ✅ สำคัญ */
+    min-height:300px; /* 🔥 รูปใหญ่ขึ้นจริง */
     object-fit:cover;
   }
 
@@ -86,12 +93,12 @@ canvas{
 <script>
 /* ===== 6 IMAGES ===== */
 const images = [
-  "https://picsum.photos/id/1011/600/450",
-  "https://picsum.photos/id/1025/600/450",
-  "https://picsum.photos/id/1035/600/450",
-  "https://picsum.photos/id/1043/600/450",
-  "https://picsum.photos/id/1062/600/450",
-  "https://picsum.photos/id/1074/600/450"
+  "https://picsum.photos/id/1011/700/500",
+  "https://picsum.photos/id/1025/700/500",
+  "https://picsum.photos/id/1035/700/500",
+  "https://picsum.photos/id/1043/700/500",
+  "https://picsum.photos/id/1062/700/500",
+  "https://picsum.photos/id/1074/700/500"
 ];
 
 let index = Number(localStorage.getItem("polaroid")) || 0;
@@ -112,11 +119,9 @@ img.onload = () => {
   ctx.globalCompositeOperation = "destination-out";
 };
 
-/* ===== SCRATCH (MOBILE EASY) ===== */
+/* ===== SCRATCH EASY ===== */
 let isDown = false;
-const BRUSH = 55; /* ✅ ใหญ่ขึ้นอีก */
-
-canvas.style.touchAction = "none";
+const BRUSH = 60; /* ใหญ่ขึ้น */
 
 function erase(x,y){
   ctx.beginPath();

@@ -2,20 +2,17 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-
-<!-- 🔥 บรรทัดนี้คือคำตอบทั้งหมด -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>โพลารอยด์ของเรา</title>
 <link rel="stylesheet" href="style.css">
 
 <style>
 /* ===============================
-   DEFAULT (DESKTOP / TABLET)
+   🔧 FINAL SIZE FIX (BALANCED)
 =============================== */
 .card{
-  max-width:420px !important;
-  width:100% !important;
+  width: clamp(340px, 92vw, 400px) !important;
+  margin: 0 auto !important;
 }
 
 /* =============================== */
@@ -45,35 +42,6 @@ canvas{
   color:#d94b8c;
   font-size:14px;
 }
-
-/* ===============================
-   📱 MOBILE ULTRA LARGE
-=============================== */
-@media (max-width: 768px){
-
-  body{
-    padding:0 !important;
-  }
-
-  .card{
-    width:100vw !important;
-    max-width:100vw !important;
-    margin:0 !important;
-    border-radius:0 !important;
-    padding:18px !important;
-  }
-
-  .photo{
-    min-height:420px;
-    max-height:70vh;
-    object-fit:cover;
-  }
-
-  canvas{
-    width:100%;
-    height:100%;
-  }
-}
 </style>
 </head>
 
@@ -97,6 +65,7 @@ canvas{
 <script src="effects.js"></script>
 
 <script>
+/* ===== 6 IMAGES ===== */
 const images = [
   "https://picsum.photos/id/1011/900/700",
   "https://picsum.photos/id/1025/900/700",
@@ -123,8 +92,9 @@ img.onload = () => {
   ctx.globalCompositeOperation = "destination-out";
 };
 
+/* ===== SCRATCH EASY ===== */
 let isDown = false;
-const BRUSH = 65;
+const BRUSH = 60;
 
 function erase(x,y){
   ctx.beginPath();
@@ -146,6 +116,7 @@ canvas.addEventListener("pointermove", e=>{
   erase(e.clientX - r.left, e.clientY - r.top);
 });
 
+/* ===== NEXT IMAGE ===== */
 document.getElementById("nextBtn").onclick = ()=>{
   index++;
   if(index >= images.length){

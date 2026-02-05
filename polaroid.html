@@ -34,9 +34,17 @@ canvas{
 }
 
 /* ===============================
-   📱 MOBILE FIX (ขยายให้ใหญ่)
+   📱 MOBILE FIX (ขยายจริง)
 =============================== */
 @media (max-width: 768px){
+
+  /* ขยายการ์ด */
+  .card{
+    width:94vw;
+    max-width:none;
+  }
+
+  /* รูปใหญ่ขึ้น */
   .scratch-wrap{
     width:100%;
   }
@@ -44,6 +52,8 @@ canvas{
   .photo{
     width:100%;
     height:auto;
+    min-height:260px; /* ✅ สำคัญ */
+    object-fit:cover;
   }
 
   canvas{
@@ -76,12 +86,12 @@ canvas{
 <script>
 /* ===== 6 IMAGES ===== */
 const images = [
-  "https://picsum.photos/id/1011/400/300",
-  "https://picsum.photos/id/1025/400/300",
-  "https://picsum.photos/id/1035/400/300",
-  "https://picsum.photos/id/1043/400/300",
-  "https://picsum.photos/id/1062/400/300",
-  "https://picsum.photos/id/1074/400/300"
+  "https://picsum.photos/id/1011/600/450",
+  "https://picsum.photos/id/1025/600/450",
+  "https://picsum.photos/id/1035/600/450",
+  "https://picsum.photos/id/1043/600/450",
+  "https://picsum.photos/id/1062/600/450",
+  "https://picsum.photos/id/1074/600/450"
 ];
 
 let index = Number(localStorage.getItem("polaroid")) || 0;
@@ -104,7 +114,7 @@ img.onload = () => {
 
 /* ===== SCRATCH (MOBILE EASY) ===== */
 let isDown = false;
-const BRUSH = 45;
+const BRUSH = 55; /* ✅ ใหญ่ขึ้นอีก */
 
 canvas.style.touchAction = "none";
 
